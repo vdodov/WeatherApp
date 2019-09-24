@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E63EFE9D233A7B3D00C67ED9 /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EFE9C233A7B3D00C67ED9 /* SummaryTableViewCell.swift */; };
+		E63EFE9F233A7B5500C67ED9 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EFE9E233A7B5500C67ED9 /* ForecastTableViewCell.swift */; };
 		E6BCF2592336111D00385F18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BCF2582336111D00385F18 /* AppDelegate.swift */; };
 		E6BCF25B2336111D00385F18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BCF25A2336111D00385F18 /* ViewController.swift */; };
 		E6BCF25E2336111D00385F18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6BCF25C2336111D00385F18 /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E63EFE9C233A7B3D00C67ED9 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
+		E63EFE9E233A7B5500C67ED9 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		E6BCF2552336111D00385F18 /* Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6BCF2582336111D00385F18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6BCF25A2336111D00385F18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E63EFE9B233A7B1F00C67ED9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E63EFE9C233A7B3D00C67ED9 /* SummaryTableViewCell.swift */,
+				E63EFE9E233A7B5500C67ED9 /* ForecastTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E6BCF24C2336111D00385F18 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		E6BCF2572336111D00385F18 /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
+				E63EFE9B233A7B1F00C67ED9 /* Cell */,
 				E6BCF2582336111D00385F18 /* AppDelegate.swift */,
 				E6BCF25A2336111D00385F18 /* ViewController.swift */,
 				E6BCF25C2336111D00385F18 /* Main.storyboard */,
@@ -139,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6BCF25B2336111D00385F18 /* ViewController.swift in Sources */,
+				E63EFE9F233A7B5500C67ED9 /* ForecastTableViewCell.swift in Sources */,
 				E6BCF26B2336113700385F18 /* Common.swift in Sources */,
+				E63EFE9D233A7B3D00C67ED9 /* SummaryTableViewCell.swift in Sources */,
 				E6BCF2592336111D00385F18 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
