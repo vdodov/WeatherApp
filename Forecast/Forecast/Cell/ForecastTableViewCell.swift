@@ -10,7 +10,7 @@ import UIKit
 
 class ForecastTableViewCell: UITableViewCell {
   static let identifier = "ForecastTableViewCell"
-
+  
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var weatherImageView: UIImageView!
@@ -19,14 +19,20 @@ class ForecastTableViewCell: UITableViewCell {
   
   
   override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    super.awakeFromNib()
+    
+    backgroundColor = .clear
+    
+    dateLabel.textColor = .white
+    timeLabel.textColor = dateLabel.textColor
+    statusLabel.textColor = dateLabel.textColor
+    temperatureLabel.textColor = dateLabel.textColor
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    
+    // Configure the view for the selected state
+  }
+  
 }
