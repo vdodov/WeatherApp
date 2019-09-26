@@ -17,6 +17,12 @@ class ViewController: UIViewController {
     return formatter
   }()
   
+  let dateFormatter: DateFormatter = {
+    let fomatter = DateFormatter()
+    fomatter.locale = Locale(identifier: "Ko_kr")
+    return fomatter
+  }()
+  
   @IBOutlet weak var listTableView: UITableView!
   
 
@@ -27,9 +33,27 @@ class ViewController: UIViewController {
       self?.listTableView.reloadData()
       
     }
+    
+    WeatherDataSource.shared.fetchForecast(lat: 37.498206, lon: 127.02761) { [weak self] in self?.listTableView.reloadData()
+    }
+  }
+  
+  var topInset: CGFloat = 0.0
+  
+  //view배치가 완료된 다음에 호출됨
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    if topInset == 0.0 {
+      let first = IndexPath(row: 0, section: 0)
+      if let cell = listTableView.cellForRow(at: first) {
+        topInset = listTableView.frame.height - cell.frame.height
+        listTableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
+      }
+      
+    }
   }
 
-
+  
 }
 
 extension ViewController: UITableViewDataSource {
@@ -42,7 +66,7 @@ extension ViewController: UITableViewDataSource {
     case 0:
       return 1
     case 1:
-      return 0
+      return WeatherDataSource.shared.forecastList.count
     default:
       return 0
     }
@@ -63,7 +87,7 @@ extension ViewController: UITableViewDataSource {
         let maxStr = tempFormatter.string(for: max) ?? "-"
         let minStr = tempFormatter.string(for: min) ?? "-"
         
-        cell.minMaxLabel.text = "최대 \(maxStr)º 최소\(minStr)"
+        cell.minMaxLabel.text = "최대 \(maxStr)º 최소 \(minStr)º"
         
         //
         let current = Double(data.temperature.tc)
@@ -76,7 +100,20 @@ extension ViewController: UITableViewDataSource {
       return cell
     }
     let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
-    //...
+    
+    let target = WeatherDataSource.shared.forecastList[indexPath.row]
+    
+    dateFormatter.dateFormat = "M.d (E)"
+    cell.dateLabel.text = dateFormatter.string(for: target.date)
+    
+    dateFormatter.dateFormat = "HH:00"
+    cell.timeLabel.text = dateFormatter.string(from: target.date)
+    
+    cell.weatherImageView.image = UIImage(named: target.skyCode)
+    cell.statusLabel.text = target.skyName
+    
+    let tempStr = tempFormatter.string(for: target.temperature) ?? "-"
+    cell.temperatureLabel.text = "\(tempStr)º"
     
     return cell
   }
