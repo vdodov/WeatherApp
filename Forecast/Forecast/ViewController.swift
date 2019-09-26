@@ -7,8 +7,28 @@
 //
 
 import UIKit
+import CoreLocation
+
+extension UIViewController {
+  func show(message: String) {
+    let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+    
+    let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+    alert.addAction(ok)
+    
+    present(alert, animated: true, completion: nil)
+  }
+}
 
 class ViewController: UIViewController {
+  
+  
+  
+  lazy var locationManage: CLLocationManager = {
+    let m = CLLocationManager()
+    m.delegate = self
+    return m
+  }()
   
   let tempFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -25,7 +45,8 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var listTableView: UITableView!
   
-
+  @IBOutlet weak var locationLabel: UILabel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -33,15 +54,26 @@ class ViewController: UIViewController {
     listTableView.separatorStyle = .none
     listTableView.showsVerticalScrollIndicator = false 
     
-    WeatherDataSource.shared.fetchSummary(lat: 37.498206, lon: 127.02761) { [weak self] in
-      self?.listTableView.reloadData()
-      
-    }
-    
-    WeatherDataSource.shared.fetchForecast(lat: 37.498206, lon: 127.02761) { [weak self] in self?.listTableView.reloadData()
-    }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    locationLabel.text = "업데이트 중..."
+    
+    if CLLocationManager.locationServicesEnabled() {
+      switch CLLocationManager.authorizationStatus() {
+      case .notDetermined:
+        locationManage.requestWhenInUseAuthorization()
+      case .authorizedWhenInUse, .authorizedAlways:
+        updateCurrentLocation()
+      case .denied, .restricted:
+        show(message: "위치 서비스 사용 불가")
+      }
+    } else {
+      show(message: "위치 서비스 사용 불가")
+    }
+  }
   var topInset: CGFloat = 0.0
   
   //view배치가 완료된 다음에 호출됨
@@ -59,6 +91,52 @@ class ViewController: UIViewController {
 
   
 }
+
+
+extension ViewController: CLLocationManagerDelegate {
+  func updateCurrentLocation() {
+    locationManage.startUpdatingLocation()
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    if let loc = locations.first {
+      print(loc.coordinate)
+      
+      let decoder = CLGeocoder()
+      decoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
+        if let place = placemarks?.first {
+          if let gu = place.locality, let dong = place.subLocality {
+            self?.locationLabel.text = "\(gu) \(dong)"
+          } else {
+            self?.locationLabel.text = place.name
+          }
+        }
+      }
+      
+      WeatherDataSource.shared.fetch(location: loc) {
+        self.listTableView.reloadData()
+      }
+    }
+    //배터리를 절약 할 수 있음
+    manager.stopUpdatingLocation()
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    show(message: error.localizedDescription)
+    manager.stopUpdatingLocation()
+  }
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      updateCurrentLocation()
+    default:
+      break
+    }
+  }
+}
+
+
+
 
 extension ViewController: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {

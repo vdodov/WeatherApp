@@ -24,6 +24,7 @@
 		E63EFEA1233B0CDC00C67ED9 /* Summaryapi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Summaryapi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E63EFEA2233B130B00C67ED9 /* Forecastapi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Forecastapi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E676BF2F233BC8A300939895 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E67AB481233D401C003A77E5 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		E6BCF2552336111D00385F18 /* Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6BCF2582336111D00385F18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6BCF25A2336111D00385F18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 				E6BCF2642336111E00385F18 /* Info.plist */,
 				E6BCF26A2336113700385F18 /* Common.swift */,
 				E676BF2F233BC8A300939895 /* Model.swift */,
+				E67AB481233D401C003A77E5 /* Location.gpx */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";
