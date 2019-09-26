@@ -87,7 +87,7 @@ struct Forecast: Codable {
   }
   
   struct Result: Codable {
-    let code: String
+    let code: Int
     let message: String
   }
   
@@ -129,13 +129,9 @@ let task = session.dataTask(with: url) { (data, response, error) in
     
     forecast.result.code
     forecast.result.message
-    print(forecast.result.code)
-    print(forecast.result.message)
     
     forecast.weather.forecast3days.first?.fcst3hour.sky
     forecast.weather.forecast3days.first?.fcst3hour.temperature
-    print(forecast.weather.forecast3days.first?.fcst3hour.sky)
-    print(forecast.weather.forecast3days.first?.fcst3hour.temperature)
     
   } catch {
     

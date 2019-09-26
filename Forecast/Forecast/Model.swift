@@ -145,19 +145,19 @@ class WeatherDataSource {
   var forecastList = [Any]()
   
   func fetchSummary(lat: Double, lon: Double, completion: @escaping () -> ()) {
-    defer {
-      DispatchQueue.main.async {
-        completion()
-      }
-    }
-    
-    let apiUrl = "https://apis.openapi.sk.com/weather/current/minutely?version=2&lat=\(lat))&lon=\(lon)&appKey=\(appKey)"
+    let apiUrl = "https://apis.openapi.sk.com/weather/current/minutely?version=2&lat=\(lat)&lon=\(lon)&appKey=\(appKey)"
     
     let url = URL(string: apiUrl)!
     
     let session = URLSession.shared
     
     let task = session.dataTask(with: url) { (data, response, error) in
+      defer {
+        DispatchQueue.main.async {
+          completion()
+        }
+      }
+      
       if let error = error {
         print(error)
         return
@@ -193,12 +193,6 @@ class WeatherDataSource {
   func fetchForecast(lat: Double, lon: Double, completion: @escaping () -> ()) {
     forecastList.removeAll()
     
-    defer {
-      DispatchQueue.main.async {
-        completion()
-      }
-    }
-    
     let apiUrl = "https://apis.openapi.sk.com/weather/forecast/3days?version=2&lat=\(lat)&lon=\(lon)&appKey=\(appKey)"
     
     let url = URL(string: apiUrl)!
@@ -206,6 +200,12 @@ class WeatherDataSource {
     let session = URLSession.shared
     
     let task = session.dataTask(with: url) { (data, response, error) in
+      defer {
+        DispatchQueue.main.async {
+          completion()
+        }
+      }
+      
       if let error = error {
         print(error)
         return
