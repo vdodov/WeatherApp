@@ -166,7 +166,7 @@ struct Forecast: Codable {
   }
   
   struct Result: Codable {
-    let code: String
+    let code: Int
     let message: String
   }
   
