@@ -1,6 +1,6 @@
 # WeatherApp
 
-#####API를 이용한 날씨앱⛅️
+**API를 이용한 날씨앱⛅️**
 
 
 
@@ -16,9 +16,6 @@
 
 
 
+✅  **완성화면**
 
-
-✅ **완성화면**
-
-![WeatherApp](/Volumes/Transcend/chasuyeon/WeatherApp/image/WeatherApp.gif)
-
+![WeatherApp](/Users/chasuyeon/Desktop/WeatherApp/image/WeatherApp.gif)
