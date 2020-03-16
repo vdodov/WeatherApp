@@ -57,15 +57,15 @@ class SummaryTableViewCell: UITableViewCell {
   }
   
   private func addSubviews() {
-    addSubview(weatherImageView)
-    addSubview(statusLabel)
-    addSubview(maxMinLabel)
-    addSubview(temperatureLabel)
+    contentView.addSubview(weatherImageView)
+    contentView.addSubview(statusLabel)
+    contentView.addSubview(maxMinLabel)
+    contentView.addSubview(temperatureLabel)
   }
   
   private func autoLayout() {
-    weatherImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-    weatherImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+    weatherImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    weatherImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
     weatherImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
     weatherImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
@@ -73,11 +73,11 @@ class SummaryTableViewCell: UITableViewCell {
     statusLabel.centerYAnchor.constraint(equalTo: weatherImageView.centerYAnchor).isActive = true
     
     maxMinLabel.topAnchor.constraint(equalTo: weatherImageView.bottomAnchor, constant: 10).isActive = true
-    maxMinLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+    maxMinLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     
     temperatureLabel.topAnchor.constraint(equalTo: maxMinLabel.bottomAnchor, constant: 10).isActive = true
-    temperatureLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-    temperatureLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+    temperatureLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+    temperatureLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }
   
   required init?(coder: NSCoder) {

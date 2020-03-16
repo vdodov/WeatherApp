@@ -237,6 +237,7 @@ extension WeatherCasterViewController: CLLocationManagerDelegate {
       }
       //테이블뷰 리로드
       WeatherDataManager.shared.fetch(location: loc) {
+        self.topInset = 0.0
         self.tableView.reloadData()
       }
     }
